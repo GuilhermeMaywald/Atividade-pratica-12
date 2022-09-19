@@ -15,26 +15,42 @@ Requisitos:
 */
 
 {
-    function recebeCPFUsuario(cpf) {
+    function cpfValido(cpf) {
         if (cpf.length == 11) {
             return true;
         } else {
             return false;
         }
     }
-    let recebeCPF = prompt('Digite seu CPF (apenas números): ');
-    let cpfValido = recebeCPFUsuario(recebeCPF);
-    function cpfFormatado(cpf,cpfVerdadeiro) {
-        if (cpfVerdadeiro == true) {
-            let parte1 = cpf.slice(0, 3);
-            let parte2 = cpf.slice(3, 6);
-            let parte3 = cpf.slice(6, 9);
-            let parte4 = cpf.slice(9, 11);
-            return cpf = `${parte1}.${parte2}.${parte3}-${parte4}`;
+    function mascaraCPF(cpf) {
+        let digitos = cpf.split("");
+        let mascaraCPF =
+            digitos[0] +
+            digitos[1] +
+            digitos[2] +
+            "." +
+            digitos[3] +
+            digitos[4] +
+            digitos[5] +
+            "." +
+            digitos[6] +
+            digitos[7] +
+            digitos[8] +
+            "-" +
+            digitos[9] +
+            digitos[10];
+        return mascaraCPF;
+    }
+
+    for (let index = 0; index < 5; index++) {
+        let cpfDigitado = prompt('Digite CPF ' + (index + 1));
+        if (cpfValido(cpfDigitado)) {
+            let cpfComMascara = mascaraCPF(cpfDigitado);
+            cpfs[index] = cpfComMascara;
+            alert('CPF digitado ' + cpfComMascara + ' é válido.');
         } else {
-            return 'Digite um CPF válido!';
+            alert('CPF inválido');
         }
     }
-    alert(cpfFormatado(recebeCPF, cpfValido));
-    
+
 }
